@@ -20,7 +20,7 @@ int rec(int i, int j)
 }
 int lcs(string s, string t)
 {
-		a = s;
+	a = s;
     	b = t;
     	memset(dp,0,sizeof(dp));
     	memset(done,false,sizeof(done));
