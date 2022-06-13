@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 
+// Trying to make b equal to a
 string a,b;
 int dp[1111][1111];
 bool done[1111][1111];
@@ -27,9 +28,9 @@ int rec(int i, int j)
     }
     else
     {
-        Delete = 1+rec(i,j+1);
-        Replace = 1+rec(i+1,j+1);
-        Insert = 1+min(rec(i,j+1),rec(i+1,j));
+        Delete = 1+rec(i,j+1);        // char in b is deleted so j+1 and i remains same
+        Replace = 1+rec(i+1,j+1);    // i and j made same by replacement so i+1,j+1
+        Insert = 1+rec(i+1,j);      // char in b is inserted so i+1 and j remains same
         return dp[i][j] = min({Delete,Replace,Insert});
     }
     
