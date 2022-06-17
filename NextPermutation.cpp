@@ -27,7 +27,7 @@ vector<int> nextPermutation(vector<int> &permutation, int n)
     
       for(int i = n-1; i >= 0; i--)
        {
-           if(permutation[index1] < permutation[i])
+           if(index1 != -1 && permutation[index1] < permutation[i])
            {
                 index2 = i;
                 break;
