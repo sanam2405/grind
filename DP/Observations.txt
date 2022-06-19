@@ -1,2 +1,2 @@
 1. Whenever we need to return the maximum or the minimum, we return 0 from the base case and add 1 in the possibilities.
-2. Whenever we need to return the total number of ways, we return 1 in the base case and just add the possibilities.
+2. Whenever we need to return the total number of ways, we return 1 from the base case and just add the possibilities.
