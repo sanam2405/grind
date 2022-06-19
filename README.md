@@ -1,2 +1,2 @@
 # FAQs
-This contains solution to the most typical DSA questions
+This repository contains solution to the most typical DSA questions
