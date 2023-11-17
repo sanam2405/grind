@@ -6,10 +6,15 @@ typedef long double ld;
 
 /*
 
-Sum of digits of all numbers 
-from A to B inclusive
+Given a range [A,B]
+Find the number of occurrence 
+of digit D in the numbers 
+in the range [A,B]
 
 */
+
+ll A,B;
+ll D;
 
 ll dp[22][2][10010];
 bool done[22][2][10010];
@@ -27,34 +32,29 @@ vector<ll> generate(ll n)
     return N;
 }
 
-ll rec(ll idx, ll tight, ll sum, vector<ll> &N)
+ll rec(ll idx, ll tight, ll cntDigs, vector<ll> &N)
 {
     if(idx==N.size())
-    {
-        return sum;
-    }
+    return cntDigs;
 
-    if(done[idx][tight][sum])
-        return dp[idx][tight][sum];
+    if(done[idx][tight][cntDigs])
+        return dp[idx][tight][cntDigs];
+
+    done[idx][tight][cntDigs]=1;
 
     ll range;
-
     if(tight)
         range = N[idx];
     else
         range = 9;
-
     ll ans = 0;
-
     for(ll i = 0; i <= range; i++)
-    {       
-        ll newTight = tight && (i == N[idx]);         
-        ans += rec(idx+1,newTight,sum+i,N);
+    {
+        ll newTight = tight&&(N[idx]==i);
+        ans += rec(idx+1,newTight,cntDigs+(i==D),N);
     }
-
-    done[idx][tight][sum] = 1;
-
-    return dp[idx][tight][sum] = ans;
+    
+    return dp[idx][tight][cntDigs] = ans;
 }
 
 void memclear()
@@ -74,9 +74,10 @@ void memclear()
 
 void solve()
 {
-    ll A,B;
     cin >> A >> B;
-    
+    cin >> D;
+
+   
     vector<ll> N_A = generate(A - 1);
     ll ansA = rec(0, 1, 0, N_A);
 
@@ -106,9 +107,9 @@ int main() {
      t = 1;
      cin >> t;
      while (t--)
-     {
-          memclear();
-          solve();
+     {  
+        memclear();
+        solve();
      }
 
      return 0;
