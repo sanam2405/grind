@@ -4,6 +4,9 @@ using namespace std;
 typedef long long int ll;
 typedef long double ld;
 
+ll dp[22][2][2][2];
+bool done[22][2][2][2];
+
 ll rec(ll idx, ll even, ll leadingZeros, ll tight, vector<ll> &N)
 {
      if(idx==N.size())
@@ -13,6 +16,11 @@ ll rec(ll idx, ll even, ll leadingZeros, ll tight, vector<ll> &N)
           else
           return 0;
      }
+
+     if(done[idx][even][leadingZeros][tight])
+          return dp[idx][even][leadingZeros][tight];
+
+     done[idx][even][leadingZeros][tight] = 1;
 
      ll range;
      
@@ -49,7 +57,7 @@ ll rec(ll idx, ll even, ll leadingZeros, ll tight, vector<ll> &N)
                }
           }
      
-     return ans;
+     return dp[idx][even][leadingZeros][tight] = ans;
 }
 
 vector<ll> generate(ll n)
@@ -63,6 +71,18 @@ vector<ll> generate(ll n)
      reverse(begin(N),end(N));
      return N;
 }
+
+void memclear()
+{
+     for(ll i = 0; i < 22; i++)
+          for(ll j = 0; j < 2; j++)
+               for(ll k = 0; k < 2; k++)
+                    for(ll l = 0; l < 2; l++)
+                    {
+                         dp[i][j][k][l]=0;
+                         done[i][j][k][l]=false;
+                    }
+}
 void solve()
 {
      ll L,R;
@@ -70,8 +90,9 @@ void solve()
 
      vector<ll> N_L = generate(L-1);
      vector<ll> N_R = generate(R);
-
+     memclear();
      ll ansR = rec(0,1,1,1,N_R);
+     memclear();
      ll ansL = rec(0,1,1,1,N_L);
 
      // cout << ansR << " " << ansL << "\n";
@@ -98,6 +119,7 @@ int main() {
      cin >> t;
      while (t--)
      {
+          memclear();
           solve();
      }
 
