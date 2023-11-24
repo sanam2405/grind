@@ -3,19 +3,17 @@ bool done[111][111];
 
 int rec(int i, int j, vector<int> &arr)
 {
-    if(i==j)
+    if(i+1==j)
         return 0;
+
     int mini = 1e9;
     if(done[i][j])
         return dp[i][j];
     done[i][j]=1;
-    for(int k = i; k <= j-1; k++)
+    for(int k = i+1; k <= j-1; k++)
     {
-        int steps = arr[i-1]*arr[k]*arr[j] + rec(i,k,arr) + rec(k+1,j,arr);
-        if(steps<mini)
-        {
-			mini = steps;
-        }
+        int steps = arr[i]*arr[k]*arr[j] + rec(i,k,arr) + rec(k,j,arr);
+        mini = min(mini,steps);
     }
     return dp[i][j] = mini;
 }
@@ -29,6 +27,6 @@ int matrixMultiplication(vector<int> &arr, int N)
             done[i][j]=false;
         }
     }
-    int ans = rec(1,N-1,arr);
+    int ans = rec(0,N-1,arr);
     return ans;
 }

@@ -1,2 +1,5 @@
 1. Whenever we need to return the maximum or the minimum, we return 0 from the base case and add 1 in the possibilities.
 2. Whenever we need to return the total number of ways, we return 1 from the base case and just add the possibilities.
+3. For digit DP, when we find count of possible numbers, we return 1 from the base case after checking the viability of the current solution.
+4. For digit DP, when we find the count of digits or sum of digits, we take an extra state in the rec(...) and return the state in from the base case.
+5. In case we need to print the LIS, number of LIS or MCM Brackets, we can take pair<int,int> and pair<string,int> to store the values taken from the current state.
